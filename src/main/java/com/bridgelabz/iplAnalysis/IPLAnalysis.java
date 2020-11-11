@@ -14,7 +14,6 @@ public class IPLAnalysis {
             ICSVBuilder csvBuilder=CSVBuilderFactory.createCSVBuilder();
             List<IPLData1> IPLData1CsvList=csvBuilder.getCSVFileList(reader,IPLData1.class);
             return IPLData1CsvList;
-
         }catch (IOException ioException){
             throw new IPLAnalysisException("File problem", IPLAnalysisException.ExceptionType.FILE_PROBLEM);
 
@@ -25,25 +24,20 @@ public class IPLAnalysis {
         try(Reader reader= Files.newBufferedReader(Paths.get(iplData2))){
             ICSVBuilder csvBuilder=CSVBuilderFactory.createCSVBuilder();
             List<IPLData2> IPLData2CsvList=csvBuilder.getCSVFileList(reader,IPLData2.class);
-
             return IPLData2CsvList;
-
         }catch (IOException ioException){
             throw new IPLAnalysisException("File problem", IPLAnalysisException.ExceptionType.FILE_PROBLEM);
-
         }
     }
 
       public int getBattingAvg(String iplData1) throws IPLAnalysisException {
-        int avgBattingScore=0;
         int totalScore=0;
           List<IPLData1> IPLData1CsvList= loadCSVFile1(iplData1);
           for(int i=0;i<IPLData1CsvList.size();i++) {
               IPLData1 data = IPLData1CsvList.get(i);
               totalScore=totalScore+data.Runs;
           }
-          avgBattingScore=totalScore/IPLData1CsvList.size();
-          return avgBattingScore;
+          return totalScore/IPLData1CsvList.size();
   }
 
     public String getHighestStrikingRate_Player(String iplData2) throws IPLAnalysisException {
@@ -51,8 +45,6 @@ public class IPLAnalysis {
         Comparator<IPLData2> StateCodeCSVComparator=Comparator.comparing(census -> census.SR);
         sort(IPLData2CsvList,StateCodeCSVComparator);
         String sortedIPLBlowingData=new Gson().toJson(IPLData2CsvList);
-        System.out.println(IPLData2CsvList);
-
         return sortedIPLBlowingData;
     }
 
@@ -70,15 +62,9 @@ public class IPLAnalysis {
     }
 
   public String getPlayerWithHighestSix_Four(String iplData1) throws IPLAnalysisException {
-
         List<IPLData1> IPLData1CsvList= loadCSVFile1(iplData1);
-        Collections.sort(IPLData1CsvList, new com.bridgelabz.iplAnalysis.Comparator.PlayerSixesComparator()
-                .thenComparing(new com.bridgelabz.iplAnalysis.Comparator.PlayerFourComparator())
-               );
-        System.out.println("After:"+IPLData1CsvList);
-        String sortedIPLBlowingData=new Gson().toJson(IPLData1CsvList);
-        System.out.println(sortedIPLBlowingData);
-        return sortedIPLBlowingData;
+        Collections.sort(IPLData1CsvList, new com.bridgelabz.iplAnalysis.Comparator.PlayerSixesComparator().thenComparing(new com.bridgelabz.iplAnalysis.Comparator.PlayerFourComparator()));
+        return new Gson().toJson(IPLData1CsvList);
     }
 
 

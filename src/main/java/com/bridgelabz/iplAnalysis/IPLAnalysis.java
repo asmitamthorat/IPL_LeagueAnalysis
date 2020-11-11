@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class IPLAnalysis {
     public String getHighestStrikingRate_Player(String iplData2) throws IPLAnalysisException {
         List<IPLData2> IPLData2CsvList= loadCSVFile2(iplData2);
         Comparator<IPLData2> StateCodeCSVComparator=Comparator.comparing(census -> census.SR);
-       sort(IPLData2CsvList,StateCodeCSVComparator);
+        sort(IPLData2CsvList,StateCodeCSVComparator);
         String sortedIPLBlowingData=new Gson().toJson(IPLData2CsvList);
         System.out.println(IPLData2CsvList);
 
@@ -67,6 +68,20 @@ public class IPLAnalysis {
             }
         }
     }
+
+  public String getPlayerWithHighestSix_Four(String iplData1) throws IPLAnalysisException {
+
+        List<IPLData1> IPLData1CsvList= loadCSVFile1(iplData1);
+        Collections.sort(IPLData1CsvList, new com.bridgelabz.iplAnalysis.Comparator.PlayerSixesComparator()
+                .thenComparing(new com.bridgelabz.iplAnalysis.Comparator.PlayerFourComparator())
+               );
+        System.out.println("After:"+IPLData1CsvList);
+        String sortedIPLBlowingData=new Gson().toJson(IPLData1CsvList);
+        System.out.println(sortedIPLBlowingData);
+        return sortedIPLBlowingData;
+    }
+
+
 
 
 

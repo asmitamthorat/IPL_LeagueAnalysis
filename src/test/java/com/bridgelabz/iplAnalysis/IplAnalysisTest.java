@@ -43,5 +43,13 @@ public class IplAnalysisTest {
     }
 
 
+    @Test
+    public void givenBattingData_ShouldReturnPlayer_WithMaximumFourAndSix() throws  IPLAnalysisException{
+        IPLAnalysis iplAnalysis=new IPLAnalysis();
+        String Sortedlist= iplAnalysis.getPlayerWithHighestSix_Four(IPL_DATA1);
+        IPLData2[] IPLData2=new Gson().fromJson(Sortedlist,IPLData2[].class);
+        Assert.assertEquals("Andre Russell" ,IPLData2[IPLData2.length-1].PLAYER);
+    }
+
 
 }

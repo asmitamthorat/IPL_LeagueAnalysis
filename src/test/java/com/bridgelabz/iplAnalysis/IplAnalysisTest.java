@@ -36,9 +36,9 @@ public class IplAnalysisTest {
     @Test
     public void battingPayerWithHighestStrikeRte_ifHasCorrectNumberOfRecord_ShouldReturnTrue() throws IPLAnalysisException{
         IPLAnalysis iplAnalysis=new IPLAnalysis();
-        String list=iplAnalysis.getHighestStrikingRate_Player(IPL_DATA2);
-       // IndiaCensusCSV[] censusCSV=new Gson().fromJson(sortedCensusData,IndiaCensusCSV[].class);
-      //  Assert.assertEquals(1.99812341E8 ,censusCSV[0].population,0.00001);
+        String Sortedlist=iplAnalysis.getHighestStrikingRate_Player(IPL_DATA2);
+        IPLData2[] IPLData2=new Gson().fromJson(Sortedlist,IPLData2[].class);
+       Assert.assertEquals("Krishnappa Gowtham" ,IPLData2[0].PLAYER);
 
     }
 

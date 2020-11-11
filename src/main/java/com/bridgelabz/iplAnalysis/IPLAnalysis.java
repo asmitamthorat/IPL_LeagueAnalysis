@@ -1,7 +1,5 @@
 package com.bridgelabz.iplAnalysis;
-
 import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -35,13 +33,6 @@ public class IPLAnalysis {
         }
     }
 
-
-
-
-
-
-
-
       public int getBattingAvg(String iplData1) throws IPLAnalysisException {
         int avgBattingScore=0;
         int totalScore=0;
@@ -58,10 +49,10 @@ public class IPLAnalysis {
         List<IPLData2> IPLData2CsvList= loadCSVFile2(iplData2);
         Comparator<IPLData2> StateCodeCSVComparator=Comparator.comparing(census -> census.SR);
        sort(IPLData2CsvList,StateCodeCSVComparator);
-        String sortedStateCensusJson=new Gson().toJson(IPLData2CsvList);
+        String sortedIPLBlowingData=new Gson().toJson(IPLData2CsvList);
         System.out.println(IPLData2CsvList);
 
-        return sortedStateCensusJson;
+        return sortedIPLBlowingData;
     }
 
     private <E> void sort(List<E> CsvList, Comparator<E> CSVComparator) {
